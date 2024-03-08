@@ -1,13 +1,12 @@
 import { useState } from 'react'
-
+import './App.css'
+import Navbar from './Landing-Page/Navbar'
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      <h1>College Thrift</h1>
-      <p>{count}</p>
-      <button onClick={() => setCount(count + 1)}>Increment</button>
+    <Navbar />
     </>
   )
 }
