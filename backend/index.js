@@ -3,7 +3,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import cookieParser from "cookie-parser"
-
+import userRoute from './routes/UserRoutes.js'
 //utils
 import connectDB from "./config/db.js"
 
@@ -22,6 +22,7 @@ app.get("/" , (req,res)=> {
     res.send("Hello World");
 
 })
+app.use("/api/users", userRoute)
 
 app.listen(port, () => {
     console.log(`server running on port ${port}`);

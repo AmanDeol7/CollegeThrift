@@ -1,4 +1,6 @@
-import {Schema}from "mongoose"
+import mongoose from "mongoose"
+import {Schema} from "mongoose"
+
 
 const UserSchema = Schema({
     username: {type:String , required: true},
