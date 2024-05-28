@@ -10,11 +10,11 @@ import createToken from "../utils/createToken.js";
         throw new Error("Please fill all the fields");
       
     }
-    // const userExists =  await findOne({email});
-    // if(userExists) {
-    //     res.status(400).send("User already exists.")
+    const userExists =  await User.findOne({email});
+    if(userExists) {
+        res.status(400).send("User already exists.")
 
-    // }
+    }
 
     const newUser = new User({username , email, password});
 
@@ -39,4 +39,22 @@ import createToken from "../utils/createToken.js";
 
     
 })
-export default createUser
+
+const loginUser = asyncHandler(async(req,res) => {
+    const {email, password} = req.body;
+    const userExists =  await User.findOne({email})
+
+    if(userExists) {
+       const isPasswordValid = await bcrypt.compare(password, userExists.password)
+       if(isPasswordValid) {
+            createToken(res, userExists._id) 
+            
+
+            res.status(201).send(`Welcome  ${userExists.username}`)
+       }
+    }
+    return
+
+  
+ })
+export   {createUser, loginUser}
