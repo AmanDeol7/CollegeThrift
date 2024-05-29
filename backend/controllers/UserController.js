@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 import createToken from "../utils/createToken.js";
 
  const createUser = asyncHandler(async(req,res)=>{
-    const {username, email, password} = req.body;
+    const {username, email, password, isAdmin} = req.body;
     if(!username || !email || !password){ //little bit of validation
         res.status(400);
         throw new Error("Please fill all the fields");
@@ -16,7 +16,7 @@ import createToken from "../utils/createToken.js";
 
     }
 
-    const newUser = new User({username , email, password});
+    const newUser = new User({username , email, password ,isAdmin});
 
      
 
@@ -65,6 +65,36 @@ const loginUser = asyncHandler(async(req,res) => {
         httpOnly: true,
  })
   res.status(200).send("Successfully logged out");
+
+ }) 
+
+
+const getAllUsers = asyncHandler(async(req,res) => {
+    const users = await User.find({})
+    res.json(users);
+
+
+
+
+
+})
+
+const getCurrentProfile = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id);
   
- })
-export   {createUser, loginUser, logoutControl}
+    if (user) {
+      res.json({
+        _id: user._id,
+        username: user.username,
+        email: user.email,
+      });
+    } else {
+      res.status(404);
+      throw new Error("User not found.");
+    }
+  });
+
+
+const updateUserProfile = asyncHandler(async(req,res) => {})
+
+export   {createUser, loginUser, logoutControl , getAllUsers, getCurrentProfile, updateUserProfile}
