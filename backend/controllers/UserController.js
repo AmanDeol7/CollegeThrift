@@ -50,7 +50,12 @@ const loginUser = asyncHandler(async(req,res) => {
             createToken(res, userExists._id) 
             
 
-            res.status(201).send(`Welcome  ${userExists.username}`)
+            res.status(201).json({
+              _id: userExists._id,
+              username: userExists.username,
+              email: userExists.email,
+              isAdmin: userExists.isAdmin,
+            });
        }
        else{
         res.status(400).send("Invalid credentials")
