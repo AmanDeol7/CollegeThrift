@@ -72,7 +72,7 @@ const loginUser = asyncHandler(async(req,res) => {
         expires: new Date(0),
         httpOnly: true,
  })
-  res.status(200).send("Successfully logged out");
+  res.status(200).json({ message: "Logged out successfully" });;
 
  }) 
 

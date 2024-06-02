@@ -31,7 +31,7 @@ const Login = () => {
       const res = await login({ email, password }).unwrap();
       console.log(res);
       dispatch(setCredentials({ ...res }));
-      // navigate(redirect);
+      navigate(redirect);
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }
@@ -67,7 +67,7 @@ const Login = () => {
 
         <div className="mt-4">
           <p className="text-white">New Customer? { " "}
-          {/* <Link to={redirect? `/register?redirect=${redirect}`:"/register"} className="text-pink-500 hover:underline">Register</Link>   */}
+          <Link to={redirect? `/register?redirect=${redirect}`:"/register"} className="text-pink-500 hover:underline">Register</Link>  
           </p> 
         </div>
         </div> 
