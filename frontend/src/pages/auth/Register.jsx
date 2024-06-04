@@ -21,7 +21,7 @@ const Register = () => {
     const {userInfo} = useSelector(state => state.auth);
     const {search} = useLocation(); //search will have query parameters
     const sp = new URLSearchParams(search); // it get the query parameters from the search
-    const redirect = sp.get("redirect" ) || "/" //. If the "redirect" parameter is present in the query string, its value is assigned to the redirect variable. Otherwise, the default value of "/" is assigned.
+    const redirect = sp.get("redirect") || "/" //. If the "redirect" parameter is present in the query string, its value is assigned to the redirect variable. Otherwise, the default value of "/" is assigned.
     useEffect(()=> {
         if(userInfo){
             navigate(redirect)
@@ -95,6 +95,12 @@ const Register = () => {
 
 
             </form>
+
+            <div className="mt-4">
+          <p className="text-white">Already a User? { " "}
+          <Link to="/login" className="text-pink-500 hover:underline">Login</Link>  
+          </p> 
+        </div>
         </div>
     </section>
     
