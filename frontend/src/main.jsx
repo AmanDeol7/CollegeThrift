@@ -6,7 +6,7 @@ import { Route , RouterProvider , createRoutesFromElements} from 'react-router'
 import { createBrowserRouter } from 'react-router-dom';
 import { Provider , } from 'react-redux'
 import store from './redux/features/store.js'
-
+import Register from './pages/auth/Register.jsx'
 
 import Login from './pages/auth/Login.jsx'
 
@@ -14,6 +14,9 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />} >
          <Route path="/login" element={<Login />} />
+         <Route path="/register" element ={<Register />}/>
+         
+
     </Route>
 
   ),
