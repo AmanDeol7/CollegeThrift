@@ -18,15 +18,12 @@ const Login = () => {
   const {search} = useLocation()
   const sp = new URLSearchParams(search);
   const redirect = sp.get('redirect') || "/";
-  useEffect(() => {
-    if(userInfo) {
-      navigate(redirect)
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    if (!email || !password) {
+      toast.error("Please enter email and password");
+      return;
     }
-  
-  }, [navigate, userInfo, redirect])
-
-  const handleFormSubmit = async(e) => {
-    e.preventDefault()
     try {
       const res = await login({ email, password }).unwrap();
       console.log(res);
@@ -34,6 +31,7 @@ const Login = () => {
       navigate(redirect);
     } catch (err) {
       toast.error(err?.data?.message || err.error);
+      setIsLoading(false); // Add this line to stop the loading state
     }
   };
   
@@ -45,15 +43,15 @@ const Login = () => {
           <h1 className='text-2xl text-white font-semibold mb-4'>Sign In </h1>
        
 
-        <form  onSubmit={handleFormSubmit}className='container w-[40rem]'>
+        <form  onSubmit={handleFormSubmit}  className='container w-[40rem]'>
           <div className="my-2rem"> 
           <label htmlFor="email" className='block text-sm font-medium text-white'>Email Address</label>
-          <input type="email"  id="email"  className='mt-1 rounded w-full p-2 bg-neutral-700 text-white' value={email} onChange={e => setEmail(e.target.value)}/>
+          <input type="email"  id="email"  className='mt-1 rounded w-full p-2 bg-neutral-700 text-white required' value={email} onChange={e => setEmail(e.target.value)}/>
           </div>
 
           <div className="my-2rem"> 
-          <label htmlFor="password" className='block text-sm font-medium text-white mt-4' >Password</label>
-          <input type="password" id="password"  className='mt-1 rounded w-full p-2 bg-neutral-700 text-white' value={password} onChange={e => setPassword(e.target.value)}/>
+          <label htmlFor="password" className='block text-sm font-medium text-white mt-4' >Password</label> 
+          <input type="password" id="password"  className='mt-1 rounded w-full p-2 bg-neutral-700 text-white required' value={password} onChange={e => setPassword(e.target.value)}/>
           </div>
 
           
@@ -67,13 +65,23 @@ const Login = () => {
 
         <div className="mt-4">
           <p className="text-white">New Customer? { " "}
-          <Link to="/register" className="text-pink-500 hover:underline">Register</Link>  
+          <Link
+              to={redirect ? `/register?redirect=${redirect}` : "/register"}
+              className="text-pink-500 hover:underline"
+            >
+              Register
+            </Link>
           </p> 
         </div>
         </div> 
-
+        <img
+          src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80"
+          alt=""
+          className="h-[55rem] w-[59rem] xl:block md:hidden sm:hidden rounded-lg"
+        />
 
       </section>
+    
     </div>
 
   )

@@ -7,7 +7,7 @@ import createToken from "../utils/createToken.js";
  const createUser = asyncHandler(async(req,res)=>{
     const {username, email, password} = req.body;
     if(!username || !email || !password){ //little bit of validation
-        res.status(400);
+
         throw new Error("Please fill all the fields");
       
     }
@@ -34,7 +34,7 @@ import createToken from "../utils/createToken.js";
         }
         catch (error) {
             console.log(error)
-            res.status(500).send("Error -  User not created");
+            res.status(400).send("Error -  User not created");
             
     }
 
@@ -58,12 +58,11 @@ const loginUser = asyncHandler(async(req,res) => {
               isAdmin: userExists.isAdmin,
             });
        }
-       else{
-        res.status(400).send("Invalid credentials")
-       }
-    }
-    return
-
+     
+        else{
+          throw new Error("Invalid email or password");
+        }
+      }
   
  })
 

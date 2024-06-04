@@ -21,7 +21,7 @@ const Register = () => {
     const {userInfo} = useSelector(state => state.auth);
     const {search} = useLocation(); //search will have query parameters
     const sp = new URLSearchParams(search); // it get the query parameters from the search
-    const redirect = sp.get("redirect") || "/" //. If the "redirect" parameter is present in the query string, its value is assigned to the redirect variable. Otherwise, the default value of "/" is assigned.
+    const redirect = sp.get('redirect') || "/" //. If the "redirect" parameter is present in the query string, its value is assigned to the redirect variable. Otherwise, the default value of "/" is assigned.
     useEffect(()=> {
         if(userInfo){
             navigate(redirect)
@@ -29,29 +29,28 @@ const Register = () => {
     }, [userInfo , navigate, redirect])
 
     const handleSubmit = async(e) => {
+
         e.preventDefault();
-
-        if(password !== confirmPassword){  
-            toast.error("Passwords do not match")
-
-
-        }
-        else{
-            try{
-                const res = await register({username , email , password}).unwrap();
-                console.log(res);
-                dispatch(setCredentials({...res}));
-                navigate(redirect);
-            }catch(err){
-                toast.error(err?.data?.message || err.error)
+        if (!email || !password) {
+            toast.error("Please enter email and password");
+            return;
+          }
+       
+          try {
+            const res = await register({ username, email, password }).unwrap();
+            dispatch(setCredentials({ ...res }));
+            
+            navigate(redirect);
+            toast.success("User successfully registered");
+          } catch (err) {
+            console.log(err);
+            if(username ||email || password === "") {
+              toast.error("All fields are required")
             }
+          
         }
-
-
-
-
-
-    }
+    
+      };
 
 
 
@@ -97,11 +96,21 @@ const Register = () => {
             </form>
 
             <div className="mt-4">
-          <p className="text-white">Already a User? { " "}
-          <Link to="/login" className="text-pink-500 hover:underline">Login</Link>  
+          <p className="text-white">Already have an  account? { " "}
+          <Link
+              to={redirect ? `/login?redirect=${redirect}` : "/login"}
+              className="text-pink-500 hover:underline"
+            >
+              Login
+            </Link>
           </p> 
         </div>
         </div>
+        <img
+          src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80"
+          alt=""
+          className="h-[55rem] w-[57%] xl:block md:hidden sm:hidden l:hidden rounded-lg"
+        />
     </section>
     
     
