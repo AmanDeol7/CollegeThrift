@@ -7,7 +7,7 @@ const Messages = ({variant , children}) => {
             case "success":
                 return "bg-green-100 text-green-800"
 
-            case "error":
+            case "danger":
                 return "bg-red-100 text-red-800"
 
             default:

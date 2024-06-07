@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { FaTrash, FaEdit, FaCheck, FaTimes } from "react-icons/fa";
 import Messages from "../../components/Messages";
@@ -47,7 +46,7 @@ const UserList = () => {
   const updateHandler = async (id) => {
     try {
       await updateUser({
-        userId: id,
+        id: id,
         username: editableUserName,
         email: editableUserEmail,
       });
@@ -60,9 +59,7 @@ const UserList = () => {
 
   return (
     <div className="p-4">
-    <div className="ml-[12rem] mb-10">
-      <h1 className="text-2xl  text-white font-semibold mb-4 ">Users</h1>
-      </div>
+      <h1 className="text-2xl font-semibold mb-4 text-white" >Users</h1>
       {isLoading ? (
         <Loader />
       ) : error ? (
@@ -75,25 +72,25 @@ const UserList = () => {
           <table className="w-full md:w-4/5 mx-auto">
             <thead>
               <tr>
-                <th className="px-4 py-2 text-left text-white ">ID</th>
-                <th className="px-4 py-2 text-left text-white ">NAME</th>
-                <th className="px-4 py-2 text-left text-white ">EMAIL</th>
-                <th className="px-4 py-2 text-left text-white ">ADMIN</th>
+                <th className="px-4 py-2 text-left">ID</th>
+                <th className="px-4 py-2 text-left">NAME</th>
+                <th className="px-4 py-2 text-left">EMAIL</th>
+                <th className="px-4 py-2 text-left">ADMIN</th>
                 <th className="px-4 py-2"></th>
               </tr>
             </thead>
             <tbody>
               {users.map((user) => (
                 <tr key={user._id}>
-                  <td className="px-4 py-2  text-white">{user._id}</td>
-                  <td className="px-4 py-2 text-white">
+                  <td className="px-4 py-2">{user._id}</td>
+                  <td className="px-4 py-2">
                     {editableUserId === user._id ? (
                       <div className="flex items-center">
                         <input
                           type="text"
                           value={editableUserName}
                           onChange={(e) => setEditableUserName(e.target.value)}
-                          className="w-full p-2 border rounded-lg bg-gray-800   text-white"
+                          className="w-full p-2 border rounded-lg"
                         />
                         <button
                           onClick={() => updateHandler(user._id)}
@@ -122,7 +119,7 @@ const UserList = () => {
                           type="text"
                           value={editableUserEmail}
                           onChange={(e) => setEditableUserEmail(e.target.value)}
-                          className="w-full p-2 border bg-gray-800  rounded-lg text-white"
+                          className="w-full p-2 border rounded-lg"
                         />
                         <button
                           onClick={() => updateHandler(user._id)}
@@ -133,14 +130,13 @@ const UserList = () => {
                       </div>
                     ) : (
                       <div className="flex items-center">
-                        <a href={`mailto:${user.email}`} className="text-white">{user.email}</a>{" "}
+                        <a href={`mailto:${user.email}`}>{user.email}</a>{" "}
                         <button
                           onClick={() =>
                             toggleEdit(user._id, user.name, user.email)
                           }
                         >
-                            
-                          <FaEdit className="ml-[1rem] " color="white" />
+                          <FaEdit className="ml-[1rem]" />
                         </button>
                       </div>
                     )}
@@ -157,7 +153,7 @@ const UserList = () => {
                       <div className="flex">
                         <button
                           onClick={() => deleteHandler(user._id)}
-                          className="bg-red-600 hover:bg-red-700 font-bold py-2 px-4 rounded"
+                          className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                         >
                           <FaTrash />
                         </button>
