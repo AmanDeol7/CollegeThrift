@@ -29,7 +29,28 @@ const createCategory = asyncHandler(async(req,res)=>{
 })
 
 const updateCategory = asyncHandler(async(req,res)=>{
+    try {
+        const {name} = req.body;
+        const {categoryId} = req.params;
+        const category = await Category.findById({ _id: categoryId});
 
+
+        if(!category){
+            return res.status(404).json({error: "Category not found"})
+        }
+
+        category.name = name;
+        const updatedCategory = await category.save();
+        console.log(updatedCategory)
+        res.json(updatedCategory);
+        
+
+
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({error: "Category not updated"})
+
+    }
 
 })
 
