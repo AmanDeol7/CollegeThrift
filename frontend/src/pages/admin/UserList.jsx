@@ -27,7 +27,7 @@ const UserList = () => {
   }, [refetch]);
 
   const deleteHandler = async (id) => {
-    if (window.confirm("Are you sure")) {
+    if (window.confirm("Are you sure?")) {
       try {
         await deleteUser(id);
         refetch();
@@ -51,6 +51,7 @@ const UserList = () => {
         email: editableUserEmail,
       });
       setEditableUserId(null);
+      toast.success("User updated successfully.");
       refetch();
     } catch (err) {
       toast.error(err?.data?.message || err.error);
@@ -59,7 +60,7 @@ const UserList = () => {
 
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-semibold mb-4 text-white" >Users</h1>
+      <h1 className="text-2xl font-semibold mb-4 text-white ml-[9rem]" >Users</h1>
       {isLoading ? (
         <Loader />
       ) : error ? (
@@ -72,17 +73,17 @@ const UserList = () => {
           <table className="w-full md:w-4/5 mx-auto">
             <thead>
               <tr>
-                <th className="px-4 py-2 text-left">ID</th>
-                <th className="px-4 py-2 text-left">NAME</th>
-                <th className="px-4 py-2 text-left">EMAIL</th>
-                <th className="px-4 py-2 text-left">ADMIN</th>
+                <th className="px-4 py-2 text-left text-white">ID</th>
+                <th className="px-4 py-2 text-left text-white">NAME</th>
+                <th className="px-4 py-2 text-left text-white">EMAIL</th>
+                <th className="px-4 py-2 text-left text-white">ADMIN</th>
                 <th className="px-4 py-2"></th>
               </tr>
             </thead>
             <tbody>
               {users.map((user) => (
                 <tr key={user._id}>
-                  <td className="px-4 py-2">{user._id}</td>
+                  <td className="px-4 py-2 text-white">{user._id}</td>
                   <td className="px-4 py-2">
                     {editableUserId === user._id ? (
                       <div className="flex items-center">
@@ -90,7 +91,7 @@ const UserList = () => {
                           type="text"
                           value={editableUserName}
                           onChange={(e) => setEditableUserName(e.target.value)}
-                          className="w-full p-2 border rounded-lg"
+                          className="w-full p-2 border rounded-lg bg-neutral-700 text-white"
                         />
                         <button
                           onClick={() => updateHandler(user._id)}
@@ -100,7 +101,7 @@ const UserList = () => {
                         </button>
                       </div>
                     ) : (
-                      <div className="flex items-center">
+                      <div className="flex items-center text-white ">
                         {user.username}{" "}
                         <button
                           onClick={() =>
@@ -112,14 +113,14 @@ const UserList = () => {
                       </div>
                     )}
                   </td>
-                  <td className="px-4 py-2">
+                  <td className="px-4 py-2 text-white">
                     {editableUserId === user._id ? (
                       <div className="flex items-center">
                         <input
                           type="text"
                           value={editableUserEmail}
                           onChange={(e) => setEditableUserEmail(e.target.value)}
-                          className="w-full p-2 border rounded-lg"
+                          className="w-full p-2 border rounded-lg bg-neutral-700 text-white"
                         />
                         <button
                           onClick={() => updateHandler(user._id)}
