@@ -72,23 +72,33 @@ const deleteCategory = asyncHandler(async(req,res)=>{
 
 })
 
-const getCategories = asyncHandler(async(req,res)=>{
+// const getCategories = asyncHandler(async(req,res)=>{
+//     try {
+//             const all = await Category.find({});
+//             res.json(all)
+//     } catch (error) {
+//         console.log(error);
+
+//         return res.status(400).json(error.message)
+        
+//     }
+
+// })
+
+const listCategory = asyncHandler(async (req, res) => {
     try {
-            const all = await Category.find({});
-            res.json(all)
+        const all= await Category.find({});
+        res.json(all);
     } catch (error) {
         console.log(error);
-
-        return res.status(400).json(error.message)
-        
+        return res.status(400).json(error.message);
     }
-
-})
+});
 
 const getCategory = asyncHandler(async(req,res)=>{
 try {
-    const {categoryId} = req.params;
-    const category = await Category.findById({ _id: categoryId});
+    const {id} = req.params;
+    const category = await Category.findById({ _id: id});
     if(!category){
         return res.status(404).json({error: "Category not found"})
     }
@@ -102,4 +112,4 @@ try {
 })
 
 
-export {createCategory,updateCategory, deleteCategory,getCategories,getCategory}
+export {createCategory,updateCategory, deleteCategory,getCategory , listCategory}
