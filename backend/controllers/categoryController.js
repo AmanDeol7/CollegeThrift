@@ -54,4 +54,22 @@ const updateCategory = asyncHandler(async(req,res)=>{
 
 })
 
-export {createCategory,updateCategory}
+const deleteCategory = asyncHandler(async(req,res)=>{
+    try {
+        const {categoryId} = req.params;    
+        const category = await Category.findById({ _id: categoryId});
+        if(!category){
+            return res.status(404).json({error: "Category not found"})
+        }
+        const deletedCategory = await category.deleteOne({ _id: categoryId})
+        res.json({message: "Category deleted", deletedCategory,category })
+
+    } catch (error) {
+        console.log(error)
+        res.status(400).json({error: "Category not deleted"})
+        
+    }
+
+})
+
+export {createCategory,updateCategory, deleteCategory}
