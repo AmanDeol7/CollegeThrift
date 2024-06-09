@@ -2,6 +2,7 @@
 import Category from "../models/categoryModel.js";
 import asyncHandler from "../middlewares/asyncHandler.js";
 
+import mongoose from "mongoose";
 
 const createCategory = asyncHandler(async(req,res)=>{
 
@@ -31,8 +32,8 @@ const createCategory = asyncHandler(async(req,res)=>{
 const updateCategory = asyncHandler(async(req,res)=>{
     try {
         const {name} = req.body;
-        const {categoryId} = req.params;
-        const category = await Category.findById({ _id: categoryId});
+        const { idd } = req.params;
+        const category = await Category.findById({ _id: idd});
 
 
         if(!category){
