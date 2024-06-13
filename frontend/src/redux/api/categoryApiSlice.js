@@ -1,39 +1,41 @@
-import { apiSlice  } from "./apiSlice";
+import { apiSlice } from "./apiSlice";
 import { CATEGORY_URL } from "../features/constants";
 
 
 export const categoryApiSlice = apiSlice.injectEndpoints({
-    endpoints: (builder) =>({
-            createCategory: builder.mutation({
-                query: (newCategory) => ({
-                    url: `${CATEGORY_URL}/`,
-                    method: "POST",
-                    body: newCategory
-                })
-            }),
+  endpoints: (builder) => ({
+    createCategory: builder.mutation({
+      query: (newCategory) => ({
+        url: `${CATEGORY_URL}`,
+        method: "POST",
+        body: newCategory,
+      }),
+    }),
 
-            updateCategory: builder.mutation({
-                query: (id , updatedCategory) => ({
-                    url: `${CATEGORY_URL}/${id}`,
-                    method: "PUT",
-                    body: updatedCategory
-                })
-            }),
-            deleteCategory: builder.mutation({
-                query: (categoryId) => ({
-                    url: `${CATEGORY_URL}/${categoryId}`,
-                    method: "DELETE"
-                })
-            }),
+    updateCategory: builder.mutation({
+      query: ({ categoryId, updatedCategory }) => ({
+        url: `${CATEGORY_URL}/${categoryId}`,
+        method: "PUT",
+        body: updatedCategory,
+      }),
+    }),
 
-            fetchCategories: builder.query({
+    deleteCategory: builder.mutation({
+      query: (categoryId) => ({
+        url: `${CATEGORY_URL}/${categoryId}`,
+        method: "DELETE",
+      }),
+    }),
 
-                query: () =>   `${CATEGORY_URL}/categories`,
-            })
-            
-            
-            })
-    })
+    fetchCategories: builder.query({
+      query: () => `${CATEGORY_URL}/categories`,
+    }),
+  }),
+});
 
-export const { useCreateCategoryMutation, useUpdateCategoryMutation, useDeleteCategoryMutation, useFetchCategoriesQuery } = categoryApiSlice;
-
+export const {
+  useCreateCategoryMutation,
+  useUpdateCategoryMutation,
+  useDeleteCategoryMutation,
+  useFetchCategoriesQuery,
+} = categoryApiSlice;
