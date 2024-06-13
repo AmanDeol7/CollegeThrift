@@ -216,7 +216,7 @@ const getTopProducts = asyncHandler(async (req, res) => {
     try {
         const products = await Product.find({}).sort({rating:-1}).limit(4)
         res.json(products);
-        
+
 
     } catch (error) {
         console.log(error)
@@ -224,5 +224,16 @@ const getTopProducts = asyncHandler(async (req, res) => {
     }
 })
 
+const getNewProducts = asyncHandler(async (req, res) => {
+    try {
+        const products = await Product.find({}).sort({createdAt:-1}).limit(5)
+        res.json(products);
 
-export {addProduct , updateProduct , deleteProduct , getProducts ,getProductById, getAllProducts , addReview, getTopProducts}
+
+    } catch (error) {
+        console.log(error)
+        res.status(400).json(error.message)
+    }
+})
+
+export {addProduct , updateProduct , deleteProduct , getProducts ,getProductById, getAllProducts , addReview, getTopProducts , getNewProducts}
