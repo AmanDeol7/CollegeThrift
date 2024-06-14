@@ -9,7 +9,7 @@ import {
 import { toast } from "react-toastify";
 import CategoryForm from "../../components/CategoryForm";
 import Model from "../../components/Model";
-
+import AdminMenu from "./AdminMenu";
 
 const CategoryList = () => {
   const { data: categories } = useFetchCategoriesQuery();
@@ -72,6 +72,7 @@ const CategoryList = () => {
       console.error(error);
     }
   };
+  
 
   const handleDeleteCategory = async () => {
     try {
@@ -92,7 +93,7 @@ const CategoryList = () => {
 
   return (
     <div className="ml-[10rem] flex flex-col md:flex-row">
-      {/* <AdminMenu /> */}
+      <AdminMenu />
       <div className="md:w-3/4 p-3">
         <div className="h-12">Manage Categories</div>
         <CategoryForm
