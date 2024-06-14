@@ -43,8 +43,42 @@ const ProductList = () => {
         }
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async(e) => {
+      e.preventDefault();
 
+        try {
+          const productData = new FormData();
+          productData.append("image", image);
+          productData.append("name", name);
+          productData.append("description", description);
+          productData.append("price", price);
+          productData.append("category", category);
+          productData.append("brand", brand);
+          productData.append("quantity", quantity)
+          productData.append("countInStock", stock);
+
+
+
+          const {data} = await addProduct(productData)
+           
+          if(data.error) {
+            toast.error("Product Creation failed.")
+
+          }
+          else{
+            toast.success("data.name successfully created")
+            navigate("/");
+            
+          }
+
+
+
+
+        } catch (error) {
+            console.log(error);
+            toast.error(error?.data?.message ||error.error)
+
+        }
     } 
 
   return (
