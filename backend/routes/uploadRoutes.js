@@ -5,13 +5,13 @@ import multer from "multer" //used for handling file uploads
 
 const router = express.Router();
 
-const storage = multer.diskStorage({
+const storage = multer.diskStorage({ //multer configuration
     destination: (req, file, cb)=>{
-        cb(null, "uploads/")
+        cb(null, "uploads/") // where the file should be stored
     },
-    filename:(req, file, cb)=>{
-        const extname = path.extname(file.originalname)
-        cb(null, `${file.fieldname}-${Date.now()}${extname}`)
+    filename:(req, file, cb)=>{ // how the file should be named
+        const extname = path.extname(file.originalname) //extracting the extension name of the file
+        cb(null, `${file.fieldname}-${Date.now()}${extname}`)  //field name is the name of the file input field
     }
 })
 
@@ -46,12 +46,13 @@ router.post("/", (req,res) => {
         else if (req.file){
             res.status(200).send({
                 message: "Image uploaded successfully",
-                image: `/${req.file.path}`
+                image: `/${req.file.path}`,
+                
             })
         }
         else{
             res.status(400).json({message: "No image uploaded"});
-            
+
         }
     })
 })

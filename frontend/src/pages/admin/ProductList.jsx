@@ -64,10 +64,12 @@ const ProductList = () => {
            
           if(data.error) {
             toast.error("Product Creation failed.")
+            console.log(data.error);
+
 
           }
           else{
-            toast.success("data.name successfully created")
+            toast.success(`${data.name}  successfully created`)
             navigate("/");
 
           }
