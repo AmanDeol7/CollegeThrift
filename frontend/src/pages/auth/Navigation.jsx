@@ -13,7 +13,7 @@ import "./Navigation.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useLogoutMutation } from "../../redux/api/usersApiSlice";
 import { logout } from "../../redux/features/auth/authSlice";
-// import FavoritesCount from "../Products/FavoritesCount";
+import FavoritesCount from "../Products/FavoritesCount";
 
 const Navigation = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -55,7 +55,7 @@ const Navigation = () => {
           className="flex items-center transition-transform transform hover:translate-x-2"
         >
           <AiOutlineHome className="mr-2 mt-[3rem]" size={26} />
-          <span className="hidden nav-item-name mt-[3rem]">HOME</span>{" "}
+          <span className="hidden nav-item-name mt-[3rem]">Home</span>{" "}
         </Link>
 
         <Link
@@ -63,7 +63,7 @@ const Navigation = () => {
           className="flex items-center transition-transform transform hover:translate-x-2"
         >
           <AiOutlineShopping className="mr-2 mt-[3rem]" size={26} />
-          <span className="hidden nav-item-name mt-[3rem]">SHOP</span>{" "}
+          <span className="hidden nav-item-name mt-[3rem]">Shop</span>{" "}
         </Link>
 
         <Link to="/cart" className="flex relative">
@@ -89,7 +89,7 @@ const Navigation = () => {
             <span className="hidden nav-item-name mt-[3rem]">
               Favorites
             </span>{" "}
-            {/* <FavoritesCount /> */}
+            <FavoritesCount />
           </div>
         </Link>
       </div>
@@ -198,7 +198,7 @@ const Navigation = () => {
                 className="flex items-center mt-5 transition-transform transform hover:translate-x-2"
               >
                 <AiOutlineLogin className="mr-2 mt-[4px]" size={26} />
-                <span className="hidden nav-item-name">LOGIN</span>
+                <span className="hidden nav-item-name">Login</span>
               </Link>
             </li>
             <li>
@@ -207,7 +207,7 @@ const Navigation = () => {
                 className="flex items-center mt-5 transition-transform transform hover:translate-x-2"
               >
                 <AiOutlineUserAdd size={26} />
-                <span className="hidden nav-item-name">REGISTER</span>
+                <span className="hidden nav-item-name">Register</span>
               </Link>
             </li>
           </ul>
