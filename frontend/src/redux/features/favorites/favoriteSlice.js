@@ -1,27 +1,33 @@
+
+
 import { createSlice } from "@reduxjs/toolkit";
 
-const favoriteSlice = createSlice({
-  name: "favorites",
-  initialState: [],
-  reducers: {
-    addToFavorites: (state, action) => {
-      // Checkif the product is not already favorites
-      if (!state.some((product) => product._id === action.payload._id)) {
-        state.push(action.payload);
-      }
-    },
-    removeFromFavorites: (state, action) => {
-      // Remove the product with the matching ID
-      return state.filter((product) => product._id !== action.payload._id);
-    },
-    setFavorites: (state, action) => {
-      // Set the favorites from localStorage
-      return action.payload;
-    },
-  },
-});
+const favouriteSlice =  createSlice({
+    name: "favourites",
+    initialState: [],
+    reducers: {
+      addToFavourites:(state, action) => {
+        if(!state.some((product)=>{
+          product._id === action.payload._id 
+          
+        })){//this line of code checks if there is no element in the state array that has the same _id value as the _id value of the action.payload object. If this condition is true, the code inside the if block will be executed.
+          state.push(action.payload)
 
-export const { addToFavorites, removeFromFavorites, setFavorites } =
-  favoriteSlice.actions;
-export const selectFavoriteProduct = (state) => state.favorites;
-export default favoriteSlice.reducer;
+        }
+      },
+      removeFromFavourites: (state, action) => {
+        return state.filter((product) => product._id !== action.payload._id) //remove product with matching id
+
+      },  
+      setFavourites: (state, action) => {
+        return action.payload //set favourites from local storage
+      }
+    }
+
+
+})
+
+export const {addToFavourites, removeFromFavourites, setFavourites} = favouriteSlice.actions
+export const selectFavouriteProduct = (state) => state.favourites 
+export default favouriteSlice.reducer
+

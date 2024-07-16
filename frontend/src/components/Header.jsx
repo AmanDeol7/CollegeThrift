@@ -4,7 +4,7 @@ import SmallProduct from "../pages/Products/SmallProduct";
 import ProductCarousel from "../pages/Products/ProductCarousel";
 const Header = () => {
     const {data, isLoading, error} = useGetTopProductsQuery();
-    console.log(data);
+ 
 
     if(isLoading) {
       return <Loader />
