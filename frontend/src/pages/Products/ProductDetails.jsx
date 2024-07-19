@@ -16,7 +16,7 @@ import moment from "moment";
 import HeartIcon from "./HeartIcon";
 import Ratings from "./Ratings";
 import ProductTabs from "./ProductTabs";
-// import { addToCart } from "../../redux/features/cart/cartSlice";
+import { addToCart } from "../../redux/features/cart/cartSlice";
 
 const ProductDetails = () => {
   const { id: productId } = useParams();
@@ -39,11 +39,11 @@ const ProductDetails = () => {
   const [addReview, { isLoading: loadingProductReview }] = useAddReviewMutation()
 
 
-  const submitHandler = (e) => {
+  const submitHandler = async(e) => {
     e.preventDefault();
 
     try {
-       addReview({
+      await addReview({
         productId,
         rating,
         comment,
@@ -55,10 +55,10 @@ const ProductDetails = () => {
     }
   };
 
-//   const addToCartHandler = () => {
-//     dispatch(addToCart({ ...product, qty }));
-//     navigate("/cart");
-//   };
+  const addToCartHandler = () => {
+    dispatch(addToCart({ ...product, qty }));
+    navigate("/cart");
+  };
 
   return (
     <>
@@ -84,13 +84,13 @@ const ProductDetails = () => {
               <img
                 src={product.image}
                 alt={product.name}
-                className="w-full xl:w-[50rem] lg:w-[45rem] md:w-[30rem] sm:w-[20rem] mr-[2rem]"
+                className="w-50rem  h-[50rem] xl:w-[50rem] lg:w-[45rem] md:w-[30rem] sm:w-[20rem] mr-[2rem]"
               />
 
               <HeartIcon product={product} />
             </div>
 
-            <div className="flex flex-col justify-between">
+            <div className="flex flex-col ">
               <h2 className="text-2xl font-semibold">{product.name}</h2>
               <p className="my-4 xl:w-[35rem] lg:w-[35rem] md:w-[30rem] text-[#B0B0B0]">
                 {product.description}
@@ -132,15 +132,17 @@ const ProductDetails = () => {
               <div className="flex justify-between flex-wrap">
                 <Ratings
                   value={product.rating}
-                  text={`${product.numReviews} reviews`}
+                  text={` ${product.numReviews} reviews`}
                 />
 
-                {product.countInStock > 0 && (
+
+              </div>
+              {product.countInStock > 0 && (
                   <div>
                     <select
                       value={qty}
                       onChange={(e) => setQty(e.target.value)}
-                      className="p-2 w-[6rem] rounded-lg text-black"
+                      className="p-2 w-[6rem] rounded-lg text-black mt-4"
                     >
                       {[...Array(product.countInStock).keys()].map((x) => (
                         <option key={x + 1} value={x + 1}>
@@ -150,11 +152,12 @@ const ProductDetails = () => {
                     </select>
                   </div>
                 )}
-              </div>
+             
 
-              <div className="btn-container">
+              <div className="btn-container mt-4">
+     
                 <button
-                //   onClick={addToCartHandler}
+                  onClick={addToCartHandler}
                   disabled={product.countInStock === 0}
                   className="bg-pink-600 text-white py-2 px-4 rounded-lg mt-4 md:mt-0"
                 >
