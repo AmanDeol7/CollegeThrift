@@ -95,7 +95,14 @@ import  {apiSlice}  from "./apiSlice";
               body: data,
             }),
           }),
-
+        
+          getFilteredProducts: builder.query({
+            query: ({ checked, radio }) => ({
+              url: `${PRODUCT_URL}/filtered-products`,
+              method: "POST",
+              body: { checked, radio },
+            }),
+          }),
 
 
 
@@ -117,5 +124,6 @@ export const {   useGetProductByIdQuery,
     useGetTopProductsQuery,
     useGetNewProductsQuery,
     useUploadProductImageMutation,
+    useGetFilteredProductsQuery,
     } = productApiSlice;
 
