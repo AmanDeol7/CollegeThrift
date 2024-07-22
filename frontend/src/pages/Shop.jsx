@@ -10,6 +10,7 @@ import {
 } from "../redux/features/shop/shopSlice";
 import Loader from "../components/Loader";
 import ProductCard from "./Products/ProductCard";
+import ProductDetails from "./Products/ProductDetails";
 
 const Shop = () => {
   const dispatch = useDispatch();
@@ -92,7 +93,7 @@ const Shop = () => {
             <div className="p-5 w-[15rem]">
               {categories?.map((c) => (
                 <div key={c._id} className="mb-2">
-                  <div className="flex ietms-center mr-4">
+                  <div className="flex items-center mr-4">
                     <input
                       type="checkbox"
                       id="red-checkbox"
@@ -138,11 +139,11 @@ const Shop = () => {
               ))}
             </div>
 
-            {/* <h2 className="h4 text-center py-2 bg-black rounded-full mb-2">
+            <h2 className="h4 text-center py-2 bg-black rounded-full mb-2">
               Filer by Price
-            </h2> */}
+            </h2>  
 
-            {/* <div className="p-5 w-[15rem]">
+            <div className="p-5 w-[15rem]">
               <input
                 type="text"
                 placeholder="Enter Price"
@@ -159,7 +160,7 @@ const Shop = () => {
               >
                 Reset
               </button>
-            </div> */}
+            </div>
           </div>
 
           <div className="p-3">
