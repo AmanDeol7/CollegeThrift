@@ -9,9 +9,10 @@ const ProductCard = ({ p }) => {
   const dispatch = useDispatch();
 
   const addToCartHandler = (product, qty) => {
-    dispatch(addToCart({ ...product, qty }));
+  ;
+    dispatch(addToCart({ ...product, qty}));
     toast.success("Item added successfully", {
-      position: toast.POSITION.TOP_RIGHT,
+      
       autoClose: 2000,
     });
   };
@@ -35,9 +36,9 @@ const ProductCard = ({ p }) => {
 
       <div className="p-5">
         <div className="flex justify-between">
-          <h5 className="mb-2 text-xl text-whiet dark:text-white">{p?.name}</h5>
+          <h5 className="mb-2 text-xl text-white dark:text-white">{p?.name}</h5>
 
-          <p className="text-black font-semibold text-pink-500">
+          <p className=" font-semibold text-pink-500">
             {p?.price?.toLocaleString("en-US", {
               style: "currency",
               currency: "USD",

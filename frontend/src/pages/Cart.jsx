@@ -36,13 +36,14 @@ const Cart = () => {
 
 
               {cartItems.map((item) => (
-                <div className="divide-y-2">
-                <div key={item._id} className="flex items-enter mb-[1rem] pb-2">
+                <div className="divide-y-2" key={item._id}>
+                <div  className="flex items-enter mb-[1rem] pb-2">
                   <div className="w-[10rem] h-[10rem]">
                     <img
                       src={item.image}
                       alt={item.name}
                       className="w-full h-full object-cover rounded"
+                      key={item._id}
                     />
                   </div>
 
@@ -61,6 +62,7 @@ const Cart = () => {
                     <select
                       className="w-full p-1 border rounded text-white bg-slate-900"
                       value={item.qty}
+                      key={item._id}
                       onChange={(e) =>
                         addToCartHandler(item, Number(e.target.value))
                       }

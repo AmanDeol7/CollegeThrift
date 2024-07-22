@@ -41,7 +41,7 @@ const Shop = () => {
             // Check if the product price includes the entered price filter value
             return (
               product.price.toString().includes(priceFilter) ||
-              product.price === parseInt(priceFilter, 10)
+              product.price <  parseInt(priceFilter, 10)
             );
           }
         );
@@ -119,11 +119,12 @@ const Shop = () => {
             <div className="p-5">
               {uniqueBrands?.map((brand) => (
                 <>
-                  <div className="flex items-enter mr-4 mb-5">
+                  <div className="flex items-enter mr-4 mb-5" key ={brand}>
                     <input
                       type="radio"
                       id={brand}
                       name="brand"
+
                       onChange={() => handleBrandClick(brand)}
                       className="w-4 h-4 text-pink-400 bg-gray-100 border-gray-300 focus:ring-pink-500 dark:focus:ring-pink-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                     />
@@ -146,7 +147,7 @@ const Shop = () => {
             <div className="p-5 w-[15rem]">
               <input
                 type="text"
-                placeholder="Enter Price"
+                placeholder="Enter Maximum Price"
                 value={priceFilter}
                 onChange={handlePriceChange}
                 className="w-full px-3 py-2 placeholder-gray-400 border rounded-lg focus:outline-none focus:ring focus:border-pink-300"
