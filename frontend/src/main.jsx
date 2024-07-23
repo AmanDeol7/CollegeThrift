@@ -19,10 +19,11 @@ import AllProducts from './pages/admin/AllProducts.jsx'
 import Home from './pages/Home.jsx'
 import Favourites from './pages/Products/Favourites.jsx'
 import ProductDetails from './pages/Products/ProductDetails.jsx'
-
+import Shipping from './pages/Orders/Shipping.jsx'
 import Shop from './pages/Shop.jsx'
-// import Cart from './pages/Cart.jsx'
+
 import Cart from './pages/Cart.jsx'
+import PlaceOrders from './pages/Orders/PlaceOrders.jsx'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />} >
@@ -32,6 +33,9 @@ const router = createBrowserRouter(
           <Route path="/favorite" element={<Favourites />} />
          <Route path="" element={<PrivateRoute />}  >
               <Route path="/profile" element={<Profile />} />
+              <Route path="/shipping" element={<Shipping />} />
+              <Route path="/placeorder" element= {<PlaceOrders /> }/>
+
          </Route>
           <Route path="/product/:id" element={<ProductDetails  />} />
         <Route path="/cart" element={<Cart />} />

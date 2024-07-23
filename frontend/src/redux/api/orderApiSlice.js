@@ -4,13 +4,12 @@ import { ORDER_URL, PAYPAL_URL } from "../features/constants";
 export const orderApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         createOrder: builder.mutation({
-            query: (order)=> ({
-                url: ORDER_URL,
-                method: "POSt",
-                body: "order"
-
-            })
-        }),
+            query: (order) => ({
+              url: ORDER_URL,
+              method: "POST",
+              body: order,
+            }),
+          }),
         getOrderDetails: builder.query ({
             query: (id) => ({
                 url: `${ORDER_URL}/${id}`

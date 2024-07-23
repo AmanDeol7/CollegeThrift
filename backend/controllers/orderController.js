@@ -17,53 +17,57 @@ const calcPrice = (orderItems) => {
 
 }
 
-const createOrder = async(req, res) => {
+const createOrder = async (req, res) => {
     try {
-        const {orderItems, shippingAddress, paymentMethod} = req.body
-        if(orderItems && orderItems.length === 0){
-            res.status(400)
-            throw new Error("No order items")
-            
+      const { orderItems, shippingAddress, paymentMethod } = req.body;
+  
+      if (orderItems && orderItems.length === 0) {
+        res.status(400);
+        throw new Error("No order items");
+      }
+  
+      const itemsFromDB = await Product.find({
+        _id: { $in: orderItems.map((x) => x._id) },
+      });
+  
+      const dbOrderItems = orderItems.map((itemFromClient) => {
+        const matchingItemFromDB = itemsFromDB.find(
+          (itemFromDB) => itemFromDB._id.toString() === itemFromClient._id
+        );
+  
+        if (!matchingItemFromDB) {
+          res.status(404);
+          throw new Error(`Product not found: ${itemFromClient._id}`);
         }
-        const itemsFromDb = await Product.find({_id: {$in: orderItems.map(item => item.product)}})
-        const dbOrderItems = orderItems.map((itemFromClient)=> {
-            const matchingItemFromDb = itemsFromDb.find(itemFromDb => itemFromDb._id.toString() === itemFromClient._id.toString())
-            if(!matchingItemFromDb){
-                res.status(400)
-                throw new Error(`Product not found ${itemFromClient._id}`)
-
-
-            
-            }
-            return {
-                ...itemFromClient, 
-                product:itemFromClient._id,
-                price: matchingItemFromDb.price,
-                _id: undefined
-
-            }
-        })
-
-        const {itemsPrice, shippingPrice, taxPrice, totalPrice} = calcPrice(dbOrderItems)
-        const order = new Order({
-            user: req.user._id,
-            orderItems: dbOrderItems,
-            shippingAddress,
-            paymentMethod,
-            itemsPrice,
-            shippingPrice,
-            taxPrice,
-            totalPrice
-        })
-        const createdOrder = await order.save()
-        res.status(201).json(createdOrder)
-
-
-   
+  
+        return {
+          ...itemFromClient,
+          product: itemFromClient._id,
+          price: matchingItemFromDB.price,
+          _id: undefined,
+        };
+      });
+  
+      const { itemsPrice, taxPrice, shippingPrice, totalPrice } =
+        calcPrice(dbOrderItems);
+  
+      const order = new Order({
+        orderItems: dbOrderItems,
+        user: req.user._id,
+        shippingAddress,
+        paymentMethod,
+        itemsPrice,
+        taxPrice,
+        shippingPrice,
+        totalPrice,
+      });
+  
+      const createdOrder = await order.save();
+      res.status(201).json(createdOrder);
     } catch (error) {
-        res.status(500).json({error: error.message})
+      res.status(500).json({ error: error.message });
     }
-}
+  };
 
 const getAllOrders = async(req, res) => {
     try {
