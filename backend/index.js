@@ -11,6 +11,11 @@ import productRoutes from './routes/productRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
 import path from "path"
+import cors from 'cors'
+
+app.use(cors());
+
+
 
 dotenv.config()
 const port =process.env.PORT || 5000;
