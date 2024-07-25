@@ -23,7 +23,11 @@ const port =process.env.PORT || 5000;
 connectDB()
 
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: 'https://college-thrift-git-master-aman-deols-projects.vercel.app'
+}
+
+));
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
