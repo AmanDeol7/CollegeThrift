@@ -20,7 +20,7 @@ export const addFavoriteToLocalStorage = (product) => {
       (product) => product._id !== productId //remove product with matching id
     );
   
-    localStorage.setItem("favorites", JSON.stringify(updateFavorites));
+    localStorage.setItem("favorites", JSON.stringify(updateFavorites)); 
   };
   
 

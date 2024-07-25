@@ -34,7 +34,7 @@ const Shipping = () => {
         e.preventDefault()
         dispatch(saveShippingAddress({address, city, postalCode, country}))
         dispatch(savePaymentMethod(paymentMethod))
-        navigate("/placeorder")
+        navigate("/placeorder") 
     }
   return (
     <div className="container mx-auto mt-10">
