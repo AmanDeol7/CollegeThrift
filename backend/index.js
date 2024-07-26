@@ -33,11 +33,11 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 
-app.use(express.static(path.join('', '..', 'frontend')));
+
 
 // Serve the index.html file at the root path
 app.get('/', (req, res) => {
-    res.sendFile(path.join("", '..', 'frontend', 'index.html'));
+    res.send("Hello")
 });
 app.use("/api/users", userRoute)
 app.use("/api/category", categoryRoutes)
