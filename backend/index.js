@@ -36,8 +36,9 @@ app.use(cookieParser());
 
 
 // Serve the index.html file at the root path
-app.get('/', (req, res) => {
-    res.send("Hello")
+const clientBuildDirectory  = path.join(__dirname, "/../frontend/dist");
+app.get('*', (req, res) => {
+    res.sendFile(path.join(clientBuildDirectory, "/index.html"));
 });
 app.use("/api/users", userRoute)
 app.use("/api/category", categoryRoutes)
