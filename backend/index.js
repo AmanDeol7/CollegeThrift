@@ -37,10 +37,8 @@ app.use(cookieParser());
 
 // Serve the index.html file at the root path
 const __dirname = path.resolve()
-const clientBuildDirectory  = path.join(__dirname, "/../frontend/dist");
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, "/../frontend/index.html"));
-});
+const clientBuildDirectory  = path.join(__dirname, "../frontend/dist");
+
 app.use("/api/users", userRoute)
 app.use("/api/category", categoryRoutes)
 app.use("/api/products", productRoutes)
@@ -53,7 +51,9 @@ app.get("/api/config/paypal" , (req,res)=>{
 })
 
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
-
+app.get('*', (req, res) => {
+    res.sendFile(path.join(clientBuildDirectory, "/index.html"));
+});
 
 
 app.listen(port, () => {
