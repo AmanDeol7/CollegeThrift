@@ -22,7 +22,10 @@ Follow these steps to set up and run the project locally:
 2. **Install Dependencies**
 
    ```bash
-   npm i 
+   npm i
+   cd frontend
+   npm i
+   cd ..
 2. **Run Development Server**
    ```bash
    npm run dev 
