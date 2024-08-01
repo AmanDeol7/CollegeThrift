@@ -39,7 +39,7 @@ app.use(cookieParser());
 const __dirname = path.resolve()
 const clientBuildDirectory  = path.join(__dirname, "/../frontend/dist");
 app.get('*', (req, res) => {
-    res.sendFile(path.join(clientBuildDirectory, "/index.html"));
+    res.sendFile(path.join(__dirname, "/../frontend/index.html"));
 });
 app.use("/api/users", userRoute)
 app.use("/api/category", categoryRoutes)
