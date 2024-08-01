@@ -16,7 +16,7 @@ Follow these steps to set up and run the project locally:
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/[your-username]/college-thrift.git
+   git clone https://github.com/AmanDeol7/collegeThrift.git
    cd college-thrift 
 
 2. **Install Dependencies**
