@@ -1,6 +1,6 @@
 # College Thrift
 
-College Thrift is a project designed to an e-commrece website.
+ An E-Commrece website.
 
 ## Getting Started
 
