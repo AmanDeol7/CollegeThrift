@@ -36,6 +36,7 @@ app.use(cookieParser());
 
 
 // Serve the index.html file at the root path
+const __dirname = path.resolve()
 const clientBuildDirectory  = path.join(__dirname, "/../frontend/dist");
 app.get('*', (req, res) => {
     res.sendFile(path.join(clientBuildDirectory, "/index.html"));
@@ -50,7 +51,7 @@ app.get("/api/config/paypal" , (req,res)=>{
     res.send({clientId: process.env.PAYPAL_CLIENT_ID})
     
 })
-const __dirname = path.resolve()
+
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
 
