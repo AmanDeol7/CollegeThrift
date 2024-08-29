@@ -15,5 +15,17 @@ export default defineConfig({
         
       
     }
-  }
+  },
+  build: {
+    outDir: 'dist',
+  },
+  mimeTypes: {
+    '.js': 'text/javascript',
+    '.css': 'text/css',
+    '.html': 'text/html',
+    // Add more MIME types as needed
+  },
+  headers: {
+    'Content-Type': 'text/html; charset=UTF-8',
+  },
 })
