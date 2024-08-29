@@ -13,7 +13,7 @@ export default defineConfig({
 
        
         
-      
+      S
     }
   },
   build: {
@@ -29,6 +29,6 @@ export default defineConfig({
     // Add more MIME types as needed
   },
   headers: {
-    'Content-Type': 'text/html; charset=UTF-8',
+    'Content-Type': 'application/javascript; charset=UTF-8',
   },
 })
