@@ -31,7 +31,6 @@ const Shop = () => {
       dispatch(setCategories(categoriesQuery.data));
     }
   }, [categoriesQuery.data, dispatch]);
-
   useEffect(() => {
     if (!checked.length || !radio.length) {
       if (!filteredProductsQuery.isLoading) {
@@ -41,7 +40,7 @@ const Shop = () => {
             // Check if the product price includes the entered price filter value
             return (
               product.price.toString().includes(priceFilter) ||
-              product.price <  parseInt(priceFilter, 10)
+              product.price <= parseInt(priceFilter, 10)
             );
           }
         );

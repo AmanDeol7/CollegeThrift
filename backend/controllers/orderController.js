@@ -110,7 +110,7 @@ const calculateTotalSales = async (req, res) => {
 
 }  
 
-const calcualteTotalSalesByDate = async (req, res) => {
+const calculateTotalSalesByDate = async (req, res) => {
     try {
       const salesByDate = await Order.aggregate([
         {
@@ -200,4 +200,4 @@ const calcualteTotalSalesByDate = async (req, res) => {
 
   
 
-export {createOrder , getAllOrders , getUserOrders ,countTotalOrders, calculateTotalSales, calcualteTotalSalesByDate , findOrderById, markOrderAsPaid, markOrderAsDelivered}
+export {createOrder , getAllOrders , getUserOrders ,countTotalOrders, calculateTotalSales, calculateTotalSalesByDate , findOrderById, markOrderAsPaid, markOrderAsDelivered}

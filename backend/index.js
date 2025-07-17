@@ -10,6 +10,7 @@ import productRoutes from './routes/productRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
 import path from "path"
+import { fileURLToPath } from 'url'
 import cors from 'cors'
 
 
@@ -23,10 +24,9 @@ connectDB()
 
 const app = express();
 app.use(cors({
-    
-}
-
-));
+    origin: process.env.NODE_ENV === 'development' ? 'http://localhost:5173' : true,
+    credentials: true
+}));
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -53,8 +53,6 @@ app.get("/api/config/paypal" , (req,res)=>{
 })
 
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
-app.use(express.static(path.join(__dirname, '../frontend/dist')));
-
 app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
 app.get('*', (req, res) => {

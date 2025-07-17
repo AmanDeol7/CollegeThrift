@@ -30,10 +30,9 @@ const Navigation = () => {
   const navigate = useNavigate();
 
   const [logoutApiCall] = useLogoutMutation();
-
   const logoutHandler = async () => {
     try {
-      await logoutApiCall() .unwrap();
+      await logoutApiCall().unwrap();
       dispatch(logout());
       navigate("/login");
     } catch (error) {

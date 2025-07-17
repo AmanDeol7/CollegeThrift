@@ -60,8 +60,10 @@ const loginUser = asyncHandler(async(req,res) => {
        }
      
         else{
-          throw new Error("Invalid email or password");
+          res.status(401).json({message: "Invalid email or password"});
         }
+      } else {
+        res.status(401).json({message: "Invalid email or password"});
       }
   
  })
